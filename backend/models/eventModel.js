@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema({
       required: [true, 'Please add a title for the event']
     },
     startDate: {
-      type: String,
+      type: Date,
       required:[true, 'Please provide a start date']
     },
     startTime: {
@@ -17,13 +17,24 @@ const eventSchema = new mongoose.Schema({
       type: String,
       required: [true, 'Please provide a description of the event']
     },
-    contactInfo: {
+    contactEmail: {
       type: String,
-      required: [true, 'Please provide some contact information']
+      required: [true, 'Please provide a valid email']
     },
-    location: {
+    contactPhone: {
+      type: Number,
+    },
+    eventLong: {
       type: Number,
       required: [true, 'Please provide a location']
+    },
+    eventLat: {
+      type: Number,
+      required: [true, 'Please provide a location']
+    },
+    city: {
+      type: String,
+      required: [true, 'Please provide a city']
     },
   },
   {

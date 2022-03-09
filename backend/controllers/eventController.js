@@ -1,44 +1,44 @@
 // Once I add authentication it will do all these for specific users events
 const asyncHandler = require('express-async-handler')
 
-const Events = require('../models/eventModel')
+const Event = require('../models/eventModel')
 
-// This will get all events to begin with
+// This will get all event
 // Route is GET /api/events
 const getEvents = asyncHandler(async (req, res) => {
-  const events = await Events.find()
+  const events = await Event.find()
+  if(!events) {
+    res.status(400)
+    throw new Error('There are no events available')
+  }
+  console.log(events)
   res.status(200).json(events)
 })
 
 // This will create an event
-// POST /api/event
+// POST /api/events
 const createEvent = asyncHandler(async (req, res) => {
-  if(!req.body.event) {
+  if(!req.body) {
     res.status(400)
-    throw new Error('There is no events available')
+    throw new Error('Please create an event')
   }
 
-  const event = await Events.create({
-    event: req.body.event,
+  const event = await Event.create({
+    eventTitle: req.body.eventTitle, 
+    startDate: req.body.startDate,
+    startTime: req.body.startTime,
+    description: req.body.description,
+    contactEmail: req.body.contactEmail,
+    contactPhone: req.body.contactPhone,
+    eventLong: req.body.eventLong,
+    eventLat: req.body.eventLat,
+    city: req.body.city
   })
+
   res.status(200).json(event)
-})
-
-// This will delete an event
-// PUT /api/event/:id
-const updateEvent = asyncHandler(async (req, res) => {
-  res.status(200).json({message: `Update event ${req.params.id}`})
-})
-
-// This will delete an event
-// DELETE /api/event/:id
-const deleteEvent = asyncHandler(async (req, res) => {
-  res.status(200).json({message: `Delete event ${req.params.id}`})
 })
 
 module.exports = {
   getEvents,
   createEvent,
-  updateEvent,
-  deleteEvent,
 }
