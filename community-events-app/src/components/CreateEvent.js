@@ -21,7 +21,7 @@ const CreateEvent = (props) => {
   //   contactPhone: '',
   //   eventLong: '',
   //   eventLat: '',
-  //   city: '',
+  //   city: ''
   // })
 
   const titleChangeHandler = (event) => {
@@ -70,43 +70,33 @@ const CreateEvent = (props) => {
   };
 
   const submitHandler = async (event) => {
+    console.log(event);
     event.preventDefault();
     const body = {
       eventTitle: eventTitle,
       startDate: new Date(startDate),
-      startTime: startTime,
+      startTime: startTime.replace(":", "") * 1,
       description: description,
       contactEmail: contactEmail,
       contactPhone: contactPhone,
-      eventLat: eventLat,
-      eventLong: eventLong,
+      eventLat: eventLat * 1,
+      eventLong: eventLong * 1,
       city: city,
     };
-    console.log("This is my body", body);
+
     await axios
-      .post("http://localhost:5000/api/events", {
-        eventTitle: "new title 1",
-        startDate: "2022-01-12T00:00:00.000Z",
-        startTime: 1300,
-        description: "Hello world",
-        contactEmail: "sam@gmail.com",
-        contactPhone: 7654123422,
-        eventLong: 12233,
-        eventLat: 12345,
-        city: "Manchester",
-      })
+      .post("http://localhost:5000/api/events", body)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
-    // setEventTitle("");
-    // setStartDate("");
-    // setStartTime("");
-    // setDescription("");
-    // setContactEmail("");
-    // setContactPhone("");
-    // setEventLat("");
-    // setEventLong("");
-    // setCity("");
-    console.log("this is my event", body);
+    setEventTitle("");
+    setStartDate("");
+    setStartTime("");
+    setDescription("");
+    setContactEmail("");
+    setContactPhone("");
+    setEventLat("");
+    setEventLong("");
+    setCity("");
     return;
   };
 
@@ -120,6 +110,7 @@ const CreateEvent = (props) => {
               type="text"
               required
               value={eventTitle}
+              name="eventTitle"
               onChange={titleChangeHandler}
             />
           </div>
