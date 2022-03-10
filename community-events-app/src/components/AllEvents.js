@@ -5,8 +5,7 @@ import Map from "./Map";
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
 
-  console.log("this is my events", events);
-  const getEvents = () => {
+  const getEvents = (props) => {
     axios.get("http://localhost:5000/api/events").then((response) => {
       setEvents(response.data);
     });
@@ -20,15 +19,15 @@ const AllEvents = () => {
           <h1>{newEvent.eventTitle}</h1>
         </div>
         <div className="new-expense__control">
-          <label>Add the date of the event</label>
+          <label>Event date</label>
           <date>{newEvent.startDate}</date>
         </div>
         <div className="new-expense__control">
-          <label>Add time of event</label>
+          <label>Event start time</label>
           <span>{newEvent.startTime}</span>
         </div>
         <div className="new-expense__control">
-          <label>Description of event!</label>
+          <label>Description</label>
           <span>{newEvent.description}</span>
         </div>
         <div className="new-expense__control">
@@ -40,11 +39,11 @@ const AllEvents = () => {
           <span>{newEvent.contactPhone}</span>
         </div>
         <div className="new-expense__control">
-          <label>Event Longitude</label>
+          <label>Longitude</label>
           <span>{newEvent.eventLong}</span>
         </div>
         <div className="new-expense__control">
-          <label>Event Latitude</label>
+          <label>Latitude</label>
           <span>{newEvent.eventLat}</span>
         </div>
         <div className="new-expense__control">
@@ -54,10 +53,10 @@ const AllEvents = () => {
       </div>
     </div>
   ));
-  console.log(" this is the vents list", eventsList);
+  console.log(eventsList);
   return (
     <>
-      <Map />
+      <Map eventsList={events} />
       <button onClick={getEvents}>Click to get get events</button>
       <div>{eventsList}</div>
     </>
