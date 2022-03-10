@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
+import "./CreateEvent.css";
 import Map from "./Map";
 
-const CreateEvent = (props) => {
+const CreateEvent = () => {
   const [eventTitle, setEventTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -12,6 +13,7 @@ const CreateEvent = (props) => {
   const [eventLong, setEventLong] = useState("");
   const [eventLat, setEventLat] = useState("");
   const [city, setCity] = useState("");
+  const [isEditing, setIsOpen] = useState(false);
 
   // const [event, setEvent] = useState({
   //   eventTitle: '',
@@ -75,7 +77,7 @@ const CreateEvent = (props) => {
     event.preventDefault();
     const body = {
       eventTitle: eventTitle,
-      startDate: new Date(startDate),
+      startDate: startDate,
       startTime: startTime.replace(":", "") * 1,
       description: description,
       contactEmail: contactEmail,
@@ -101,108 +103,120 @@ const CreateEvent = (props) => {
     return;
   };
 
+  const startAddingEventHandler = () => {
+    setIsOpen(true);
+  };
+  const stopAddingEventHandler = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <>
+    <div className="new-event">
       <Map />
-      <div>
-        <form onSubmit={submitHandler}>
-          <div className="new-expense__controls">
-            <div className="new-expense__control">
-              <label>Event Title</label>
-              <input
-                type="text"
-                required
-                value={eventTitle}
-                name="eventTitle"
-                onChange={titleChangeHandler}
-              />
+      {!isEditing && (
+        <button onClick={startAddingEventHandler}>Add New Event</button>
+      )}
+      {isEditing && (
+        <div>
+          <form onSubmit={submitHandler}>
+            <div className="new-event__controls">
+              <div className="new-event__control">
+                <label>Event Title</label>
+                <input
+                  type="text"
+                  required
+                  value={eventTitle}
+                  name="eventTitle"
+                  onChange={titleChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Add the date of the event</label>
+                <input
+                  type="date"
+                  min="2019-01-01"
+                  max="2022-12-31"
+                  required
+                  value={startDate}
+                  onChange={dateChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Add time of event</label>
+                <input
+                  type="time"
+                  min="0700"
+                  max="2000"
+                  required
+                  value={startTime}
+                  onChange={timeChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Description of event!</label>
+                <input
+                  type="text"
+                  required
+                  value={description}
+                  onChange={descriptionChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Contact email</label>
+                <input
+                  type="email"
+                  required
+                  value={contactEmail}
+                  onChange={emailChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Contact number</label>
+                <input
+                  type="number"
+                  required
+                  value={contactPhone}
+                  onChange={phoneChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Event Longitude</label>
+                <input
+                  type="lng"
+                  required
+                  value={eventLong}
+                  onChange={longChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>Event Latitude</label>
+                <input
+                  type="lat"
+                  required
+                  value={eventLat}
+                  onChange={latChangeHandler}
+                />
+              </div>
+              <div className="new-event__control">
+                <label>City</label>
+                <input
+                  type="text"
+                  required
+                  value={city}
+                  onChange={cityChangeHandler}
+                />
+              </div>
             </div>
-            <div className="new-expense__control">
-              <label>Add the date of the event</label>
-              <input
-                type="date"
-                min="2019-01-01"
-                max="2022-12-31"
-                required
-                value={startDate}
-                onChange={dateChangeHandler}
-              />
+            <div>
+              <button type="button" onClick={stopAddingEventHandler}>
+                Cancel
+              </button>
+              <button type="submit">Create Event</button>
             </div>
-            <div className="new-expense__control">
-              <label>Add time of event</label>
-              <input
-                type="time"
-                min="0700"
-                max="2000"
-                required
-                value={startTime}
-                onChange={timeChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Description of event!</label>
-              <input
-                type="text"
-                required
-                value={description}
-                onChange={descriptionChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Contact email</label>
-              <input
-                type="email"
-                required
-                value={contactEmail}
-                onChange={emailChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Contact number</label>
-              <input
-                type="number"
-                required
-                value={contactPhone}
-                onChange={phoneChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Event Longitude</label>
-              <input
-                type="lng"
-                required
-                value={eventLong}
-                onChange={longChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>Event Latitude</label>
-              <input
-                type="lat"
-                required
-                value={eventLat}
-                onChange={latChangeHandler}
-              />
-            </div>
-            <div className="new-expense__control">
-              <label>City</label>
-              <input
-                type="text"
-                required
-                value={city}
-                onChange={cityChangeHandler}
-              />
-            </div>
-          </div>
-          <div className="new-expense__actions">
-            <button type="button" onClick={() => console.log("button clicked")}>
-              Cancel
-            </button>
-            <button type="submit">Create Event</button>
-          </div>
-        </form>
-      </div>
-    </>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 

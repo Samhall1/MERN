@@ -5,7 +5,7 @@ import Map from "./Map";
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
 
-  const getEvents = (props) => {
+  const getEvents = () => {
     axios.get("http://localhost:5000/api/events").then((response) => {
       setEvents(response.data);
     });
@@ -15,12 +15,11 @@ const AllEvents = () => {
     <div>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label>Event Title</label>
           <h1>{newEvent.eventTitle}</h1>
         </div>
         <div className="new-expense__control">
           <label>Event date</label>
-          <date>{newEvent.startDate}</date>
+          <div>{newEvent.startDate}</div>
         </div>
         <div className="new-expense__control">
           <label>Event start time</label>
