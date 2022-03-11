@@ -52,7 +52,17 @@ const CreateEvent = () => {
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
 
-    setUserEvent("");
+    setUserEvent({
+      eventTitle: "",
+      startDate: "",
+      startTime: "",
+      description: "",
+      contactEmail: "",
+      contactPhone: "",
+      eventLong: "",
+      eventLat: "",
+      city: "",
+    });
   };
 
   const startAddingEventHandler = () => {
