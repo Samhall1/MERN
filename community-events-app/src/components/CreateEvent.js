@@ -1,106 +1,58 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./CreateEvent.css";
-import Map from "./Map";
 
 const CreateEvent = () => {
-  const [eventTitle, setEventTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [description, setDescription] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [eventLong, setEventLong] = useState("");
-  const [eventLat, setEventLat] = useState("");
-  const [city, setCity] = useState("");
+  // const [eventTitle, setEventTitle] = useState("");
+  // const [startDate, setStartDate] = useState("");
+  // const [startTime, setStartTime] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [contactEmail, setContactEmail] = useState("");
+  // const [contactPhone, setContactPhone] = useState("");
+  // const [eventLong, setEventLong] = useState("");
+  // const [eventLat, setEventLat] = useState("");
+  // const [city, setCity] = useState("");
   const [isEditing, setIsOpen] = useState(false);
 
-  // const [event, setEvent] = useState({
-  //   eventTitle: '',
-  //   startDate: '',
-  //   startTime: '',
-  //   description: '',
-  //   contactEmail: '',
-  //   contactPhone: '',
-  //   eventLong: '',
-  //   eventLat: '',
-  //   city: ''
-  // })
+  const [userEvent, setUserEvent] = useState({
+    eventTitle: "",
+    startDate: "",
+    startTime: "",
+    description: "",
+    contactEmail: "",
+    contactPhone: "",
+    eventLong: "",
+    eventLat: "",
+    city: "",
+  });
 
-  const titleChangeHandler = (event) => {
-    // Previous state will always be upto date due to ...prevState
-    setEventTitle(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const dateChangeHandler = (event) => {
-    setStartDate(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const timeChangeHandler = (event) => {
-    setStartTime(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const descriptionChangeHandler = (event) => {
-    setDescription(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const emailChangeHandler = (event) => {
-    setContactEmail(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const phoneChangeHandler = (event) => {
-    setContactPhone(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const longChangeHandler = (event) => {
-    setEventLong(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const latChangeHandler = (event) => {
-    setEventLat(event.target.value);
-    console.log(event.target.value);
-  };
-  const cityChangeHandler = (event) => {
-    setCity(event.target.value);
-    console.log(event.target.value);
+  const formValues = (event) => {
+    setUserEvent({
+      ...userEvent,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const submitHandler = async (event) => {
-    console.log(event);
     event.preventDefault();
     const body = {
-      eventTitle: eventTitle,
-      startDate: startDate,
-      startTime: startTime.replace(":", "") * 1,
-      description: description,
-      contactEmail: contactEmail,
-      contactPhone: contactPhone,
-      eventLat: eventLat * 1,
-      eventLong: eventLong * 1,
-      city: city,
+      eventTitle: userEvent.eventTitle,
+      startDate: userEvent.startDate,
+      startTime: userEvent.startTime.replace(":", "") * 1,
+      description: userEvent.description,
+      contactEmail: userEvent.contactEmail,
+      contactPhone: userEvent.contactPhone,
+      eventLat: userEvent.eventLat * 1,
+      eventLong: userEvent.eventLong * 1,
+      city: userEvent.city,
     };
 
     await axios
       .post("http://localhost:5000/api/events", body)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
-    setEventTitle("");
-    setStartDate("");
-    setStartTime("");
-    setDescription("");
-    setContactEmail("");
-    setContactPhone("");
-    setEventLat("");
-    setEventLong("");
-    setCity("");
-    return;
+
+    setUserEvent("");
   };
 
   const startAddingEventHandler = () => {
@@ -112,7 +64,7 @@ const CreateEvent = () => {
 
   return (
     <div className="new-event">
-      <Map />
+      {/* <Map /> */}
       {!isEditing && (
         <button onClick={startAddingEventHandler}>Add New Event</button>
       )}
@@ -123,11 +75,10 @@ const CreateEvent = () => {
               <div className="new-event__control">
                 <label>Event Title</label>
                 <input
-                  type="text"
                   required
-                  value={eventTitle}
+                  type="text"
                   name="eventTitle"
-                  onChange={titleChangeHandler}
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -137,8 +88,8 @@ const CreateEvent = () => {
                   min="2019-01-01"
                   max="2022-12-31"
                   required
-                  value={startDate}
-                  onChange={dateChangeHandler}
+                  name="startDate"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -148,8 +99,8 @@ const CreateEvent = () => {
                   min="0700"
                   max="2000"
                   required
-                  value={startTime}
-                  onChange={timeChangeHandler}
+                  name="startTime"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -157,8 +108,8 @@ const CreateEvent = () => {
                 <input
                   type="text"
                   required
-                  value={description}
-                  onChange={descriptionChangeHandler}
+                  name="description"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -166,8 +117,8 @@ const CreateEvent = () => {
                 <input
                   type="email"
                   required
-                  value={contactEmail}
-                  onChange={emailChangeHandler}
+                  name="contactEmail"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -175,8 +126,8 @@ const CreateEvent = () => {
                 <input
                   type="number"
                   required
-                  value={contactPhone}
-                  onChange={phoneChangeHandler}
+                  name="contactPhone"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -184,8 +135,8 @@ const CreateEvent = () => {
                 <input
                   type="lng"
                   required
-                  value={eventLong}
-                  onChange={longChangeHandler}
+                  name="eventLong"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
@@ -193,18 +144,13 @@ const CreateEvent = () => {
                 <input
                   type="lat"
                   required
-                  value={eventLat}
-                  onChange={latChangeHandler}
+                  name="eventLat"
+                  onChange={formValues}
                 />
               </div>
               <div className="new-event__control">
                 <label>City</label>
-                <input
-                  type="text"
-                  required
-                  value={city}
-                  onChange={cityChangeHandler}
-                />
+                <input type="text" required name="city" onChange={formValues} />
               </div>
             </div>
             <div>

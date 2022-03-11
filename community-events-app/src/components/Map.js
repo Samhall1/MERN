@@ -1,41 +1,31 @@
+import { Loader } from "@googlemaps/js-api-loader";
 import React from "react";
-import {
-  GoogleMap,
-  Marker,
-  withGoogleMap,
-  withScriptjs,
-} from "react-google-maps";
+import "./Map.css";
 
-const displayMap = () => {
-  return (
-    <>
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 53.480759, lng: -2.242631 }}
-      />
-      <Marker position={{ lat: 53.480759, lng: -2.242631 }} />
-    </>
-  );
-};
+const loader = new Loader({
+  apiKey: process.env.REACT_APP_GOOGLE_KEY,
+  version: "weekly",
+});
 
-const WrappedMap = withScriptjs(withGoogleMap(displayMap));
+let map;
+
+loader.load().then(() => {
+  const google = window.google;
+  const myLoc = { lat: 53.480759, lng: -2.242631 };
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: myLoc,
+    zoom: 8,
+  });
+  new google.maps.Marker({
+    position: myLoc,
+    map,
+  });
+});
 
 const Map = () => {
   return (
-    <div
-      style={{
-        width: "50vw",
-        height: "50vh",
-        paddingBottom: "20px",
-        paddingLeft: "15px",
-      }}
-    >
-      <WrappedMap
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
-        loadingElement={<div style={{ height: "100%" }} />}
-        containerElement={<div style={{ height: "100%" }} />}
-        mapElement={<div style={{ height: "100%" }} />}
-      />
+    <div className="map-container">
+      <div id="map"></div>
     </div>
   );
 };

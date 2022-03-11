@@ -5,17 +5,23 @@ import "./Navbar.css";
 const Navbar = () => {
   return (
     <>
-      <header>
-        <div className="navbar-nav mr-auto">
-          <ul>
-            <li>
-              <Link to="/allEvents">Events</Link>
-              <Link to="/createEvent">Create Event</Link>
-            </li>
-          </ul>
-        </div>
-      </header>
-      <h1 className="hello">Welcome to community events</h1>
+      <nav>
+        <h1>Welcome to community events</h1>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/allEvents">Events</Link>
+          </li>
+          <li>
+            <Link to="/createEvent">Create Event</Link>
+          </li>
+          <li>
+            <Link to="/Map">Map</Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 };
