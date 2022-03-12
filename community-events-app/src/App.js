@@ -22,15 +22,17 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className="container">
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/allEvents" element={<AllEvents />} />
-          <Route exact path="/createEvent" element={<CreateEvent />} />
-          <Route exact path="/Map" element={<Map events={events} />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route
+          exact
+          path="/allEvents"
+          element={<AllEvents events={events} />}
+        />
+        <Route exact path="/createEvent" element={<CreateEvent />} />
+        <Route exact path="/Map" element={<Map events={events} />} />
+      </Routes>
     </BrowserRouter>
   );
 };

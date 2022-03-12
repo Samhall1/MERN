@@ -3,17 +3,7 @@ import React, { useState } from "react";
 import "./CreateEvent.css";
 
 const CreateEvent = () => {
-  // const [eventTitle, setEventTitle] = useState("");
-  // const [startDate, setStartDate] = useState("");
-  // const [startTime, setStartTime] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [contactEmail, setContactEmail] = useState("");
-  // const [contactPhone, setContactPhone] = useState("");
-  // const [eventLong, setEventLong] = useState("");
-  // const [eventLat, setEventLat] = useState("");
-  // const [city, setCity] = useState("");
   const [isEditing, setIsOpen] = useState(false);
-
   const [userEvent, setUserEvent] = useState({
     eventTitle: "",
     startDate: "",
@@ -49,7 +39,7 @@ const CreateEvent = () => {
 
     await axios
       .post("http://localhost:5000/api/events", body)
-      .then((response) => console.log(response))
+      .then((response) => alert("Event has been added"))
       .catch((error) => console.log(error));
 
     setUserEvent({
@@ -63,6 +53,8 @@ const CreateEvent = () => {
       eventLat: "",
       city: "",
     });
+
+    setIsOpen(false);
   };
 
   const startAddingEventHandler = () => {
@@ -74,7 +66,6 @@ const CreateEvent = () => {
 
   return (
     <div className="new-event">
-      {/* <Map /> */}
       {!isEditing && (
         <button onClick={startAddingEventHandler}>Add New Event</button>
       )}

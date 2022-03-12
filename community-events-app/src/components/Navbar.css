@@ -1,10 +1,14 @@
+
 nav {
     display: flex;
     justify-content: space-between;
     background-color: rgb(48, 44, 44);
     padding: 10px 50px;
     color: rgb(146, 141, 141);
+    z-index:60;
+    position: sticky;
 }
+
 nav ul {
     list-style: none;
 }
