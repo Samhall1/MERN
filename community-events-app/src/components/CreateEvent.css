@@ -4,6 +4,7 @@
     gap: 1rem;
     margin-bottom: 1rem;
     text-align: left;
+    justify-content: center;
   }
   
   .new-event__control label {
@@ -15,7 +16,7 @@
   
   .new-event__control input {
     font: inherit;
-    padding: 0.5rem;
+    padding: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
     width: 20rem;
@@ -32,6 +33,14 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  @media screen and (max-width: 1000px) { 
+    .new-event {
+      width: 100%;
+      border-radius: 2px;
+      flex-direction: column;
+    }
   }
   
   .new-event button {
