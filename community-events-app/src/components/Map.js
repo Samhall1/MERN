@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { mapWrapper } from "../helpers/mapWrapper";
+import { capitalize } from "../helpers/utils";
 import "./Map.css";
 
 const Map = () => {
@@ -41,27 +42,33 @@ const Map = () => {
       }
       return event;
     });
-    console.log("=========", filterByName);
-    // what is filtered by name
     setMapEvents(filterByName);
   };
   return (
-    <>
-      <button onClick={handleResetAll}>Reset All</button>
-      {eventCityNames &&
-        eventCityNames.map((cityName) => {
-          return (
-            <div>
-              <button id={cityName} onClick={(e) => handleCityName(e)}>
-                {cityName}
-              </button>
-            </div>
-          );
-        })}
+    <div className="map-main-container">
       <div className="map-container">
+        <div className="map-container-filter-controls">
+          <button className="filter-button" onClick={handleResetAll}>
+            Reset All
+          </button>
+          {eventCityNames &&
+            eventCityNames.map((cityName) => {
+              return (
+                <div>
+                  <button
+                    className="filter-button"
+                    id={cityName}
+                    onClick={(e) => handleCityName(e)}
+                  >
+                    {capitalize(cityName)}
+                  </button>
+                </div>
+              );
+            })}
+        </div>
         <div id="map"></div>
       </div>
-    </>
+    </div>
   );
 };
 
