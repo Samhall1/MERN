@@ -1,13 +1,18 @@
-import React from "react";
-import "./Home.css";
+import React, { useEffect } from "react";
+import { mapWrapper } from "../helpers/mapWrapper";
+import "./Map.css";
 
-const Home = () => {
+const Home = ({ events }) => {
+  useEffect(() => {
+    mapWrapper(events);
+  }, [events]);
+
   return (
-    <div className="container">
-      <h1 className="title">
-        Welcome to the the interactive community events website
-      </h1>
-    </div>
+    <>
+      <div className="map-container">
+        <div id="map"></div>
+      </div>
+    </>
   );
 };
 
