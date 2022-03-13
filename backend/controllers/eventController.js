@@ -1,16 +1,16 @@
-// Once I add authentication it will do all these for specific users events
 const asyncHandler = require("express-async-handler");
 
 const Event = require("../models/eventModel");
 
-// This will get all event
-// Route is GET /api/events
+// This will get all events
+// GET /api/events
 const getEvents = asyncHandler(async (req, res) => {
   const events = await Event.find();
   if (!events) {
     res.status(400);
     throw new Error("There are no events available");
   }
+  // Check my events are coming through correctly
   console.log(events);
   res.status(200).json(events);
 });

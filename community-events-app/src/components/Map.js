@@ -21,11 +21,11 @@ const Map = () => {
     mapWrapper(mapEvents);
   }, [mapEvents]);
 
-  const filterOutNames = mapEvents
-    ?.map((event) => event.city) // optional chaining
+  const filterOutCityNames = mapEvents
+    ?.map((event) => event.city) // The ? is optional chaining
     .map((eventcity) => eventcity.toLowerCase());
   //The Set = unique
-  const eventCityNames = [...new Set(filterOutNames)];
+  const eventCityNames = [...new Set(filterOutCityNames)];
 
   const handleResetAll = async () => {
     const response = await getEvents();

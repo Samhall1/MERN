@@ -15,7 +15,7 @@ const Navbar = () => {
             <Link to="/createEvent">Create Event</Link>
           </li>
           <li>
-            <Link to="/Map">Map</Link>
+            <Link to="/Map">Filter Event</Link>
           </li>
         </ul>
       </nav>

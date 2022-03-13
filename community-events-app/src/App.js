@@ -25,7 +25,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home events={events} />} />
         <Route exact path="/createEvent" element={<CreateEvent />} />
-        <Route exact path="/Map" element={<Map events={events} />} />
+        <Route exact path="/Map" element={<Map />} />
       </Routes>
     </BrowserRouter>
   );
