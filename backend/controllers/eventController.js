@@ -11,7 +11,7 @@ const getEvents = asyncHandler(async (req, res) => {
     throw new Error("There are no events available");
   }
   // Check my events are coming through correctly
-  console.log(events);
+  // console.log(events);
   res.status(200).json(events);
 });
 
