@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { mapWrapper } from "../helpers/mapWrapper";
-import "./Map.css";
+import "./FilteredEvents.css";
 
 const Home = ({ events }) => {
   useEffect(() => {
@@ -9,7 +9,7 @@ const Home = ({ events }) => {
 
   return (
     <>
-      <div className="map-container">
+      <div data-testid="map" className="map-container">
         <div id="map"></div>
       </div>
     </>
