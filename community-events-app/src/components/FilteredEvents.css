@@ -1,0 +1,50 @@
+.map-main-container {
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.map-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
+.map-container-filter-controls {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+}
+@media screen and (max-width: 1000px) {
+    .map-container-filter-controls {
+        flex-direction: column;
+    }
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.filter-button {
+    width: 100px;
+    margin: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) { 
+    .filter-button {
+        width: 100%;
+        margin-top: 2px;
+        padding: 10px;
+        cursor: pointer;
+        margin-bottom: 2px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
